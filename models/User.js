@@ -3,6 +3,7 @@ const {Schema} = mongoose
 
 const googleUserSchema = new Schema({
     googleId: String,
+    credits: {type:Number, default: 0}
 });
 
 const facebookUserSchema = new Schema({

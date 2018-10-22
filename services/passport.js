@@ -23,17 +23,14 @@ passport.use(new GoogleStrategy(
         callbackURL: '/auth/google/callback',
         proxy: true
     },
-    (accessToken,refreshToken,profile,done)=>{
-        googleUser.findOne({googleId: profile.id}).then((existingUser)=>{
-            if (existingUser){
-                //already exist user with profile ID
-                done(null,existingUser);
-            }else{
-                new googleUser({googleId: profile.id}).save().then(user=>{
-                    done(null,user);
-                });
-            }
-        });
+    async (accessToken,refreshToken,profile,done)=>{
+        const existingUser = await googleUser.findOne({googleId: profile.id})
+        if (existingUser){
+            //already exist user with profile ID
+            return done(null,existingUser);
+        }
+        const user = await new googleUser({googleId: profile.id}).save();
+        done(null,user);
     }
 ));
 
@@ -42,22 +39,16 @@ passport.use(new FacebookStrategy(
         clientID: keys.facebookClientID,
         clientSecret: keys.facebookClientSecret,
         callbackURL: '/auth/facebook/callback',
-        proxy: true
+        proxy: true // https
     },
-    (accessToken, refreshToken, profile, cb)=>{
-        // console.log(accessToken);
-        // console.log(refreshToken);
+    async (accessToken, refreshToken, profile, cb)=>{
         console.log('profile',profile);
-        facebookUser.findOne({facebookId: profile.id}).then((existingUser)=>{
-
-            if (existingUser){
-                //already exist user with profile ID
-                cb(null,existingUser);
-            }else{
-                new facebookUser({facebookId: profile.id}).save().then(user=>{
-                    cb(null,user);
-                });
-            }
-        });
+        const existingUser = await facebookUser.findOne({facebookId: profile.id});
+        if (existingUser){
+            //already exist user with profile ID
+            return cb(null,existingUser);
+        }
+        const user = await new facebookUser({facebookId: profile.id}).save();
+        cb(null,user);
     }
 ));
