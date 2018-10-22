@@ -12,7 +12,7 @@ class Header extends Component{
                 return;
             case (false):
                 return (
-                    <li><a href='http://localhost:5000/auth/google'>Login with Google</a></li>
+                    <li><a href='/auth/google'>Login with Google</a></li>
                 );
             default:
                 return [
