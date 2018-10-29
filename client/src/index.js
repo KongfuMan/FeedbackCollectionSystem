@@ -8,6 +8,11 @@ import reducers from './reducers';
 import ReduxThunk from 'redux-thunk'
 import './setupProxy';
 
+//we can use axios to make a http request from browser console,
+// so that each of our request takes the cookie
+import axios from 'axios';
+window.axios = axios;
+
 const store = createStore(reducers,{},applyMiddleware(ReduxThunk));
 
 ReactDom.render(

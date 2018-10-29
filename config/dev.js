@@ -8,5 +8,7 @@ module.exports = {
     cookieKey: 'sfsahfdihsidfhgifgidshfsiojfiosdhg',
 
     stripePublishableKey: 'pk_test_plievPe3mYlW4Xa9vAQ7cESJ',
-    stripeSecretKey: 'sk_test_5VC1zG6ZcdHDZ2s0VyA79vaH'
+    stripeSecretKey: 'sk_test_5VC1zG6ZcdHDZ2s0VyA79vaH',
+    sendGridKey: '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',
+    redirectDomain: 'http://localhost:3000'
 }

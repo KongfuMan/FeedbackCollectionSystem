@@ -5,6 +5,7 @@ const keys = require('./config/keys');
 const cookieSession = require('cookie-session');    //tell express to use cookies
 const passport = require('passport'); ///make use of cookies
 require('./models/User');
+require('./models/Survey');
 require('./services/passport'); //passport config
 const bodyParser = require('body-parser');
 
@@ -19,7 +20,6 @@ app.use(
         keys: [keys.cookieKey]
     })
 );
-
 app.use(passport.initialize());
 app.use(passport.session()); // passport automatically put current user into request
 app.use(function(req, res, next) {
@@ -30,6 +30,7 @@ app.use(function(req, res, next) {
 
 require('./routes/authRoute')(app); //congfig the route handlers
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production'){
     //Express will serve up production assets
