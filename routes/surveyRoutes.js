@@ -14,10 +14,9 @@ module.exports = app =>{
     });
 
     app.get('/api/surveys',async (req,res)=>{
-        const surveys = await Survey.find({_user: req.user.googleId}).select({
+        const surveys = await Survey.find({_user: req.user._id}).select({
             recipients: false
         });
-        console.log(surveys)
         res.send(surveys);
     })
 

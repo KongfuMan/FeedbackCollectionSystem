@@ -22,11 +22,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session()); // passport automatically put current user into request
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
 require('./routes/authRoute')(app); //congfig the route handlers
 require('./routes/billingRoutes')(app);

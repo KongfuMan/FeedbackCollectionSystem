@@ -25,6 +25,8 @@ export const submitSurvey = (values, history)=>
 
 export const fetchSurveys = ()=>
     async (dispatch) => {
+        console.log('action creator fetchSurveyList');
         const surveys = await axios.get('/api/surveys');
-        dispatch({type:FETCH_SURVEYS, payload: surveys});
-}
+        console.log(surveys.data);
+        dispatch({type:FETCH_SURVEYS, payload: surveys.data});
+    };
